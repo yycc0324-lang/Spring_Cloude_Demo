@@ -5,15 +5,19 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>4.0.5</version>
+        <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
+    <packaging>pom</packaging>
+    <modules>
+        <module>services</module>
+    </modules><!--此处的pom指的是父，代表以后所有的依赖他是爹,父项目也无需写代码，进行Spring、微服务的依赖管理即可-->
     <groupId>com.example</groupId>
     <artifactId>cloud_demo</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>cloud_demo</name>
     <description>cloud_demo</description>
-    <url/>
+    <!--<url/>
     <licenses>
         <license/>
     </licenses>
@@ -25,21 +29,71 @@
         <developerConnection/>
         <tag/>
         <url/>
-    </scm>
-    <properties>
+    </scm>--><!--这里在企业开发的时候会使用到，写一些声明和信息之类的，目前不需要先注释掉-->
+    <properties><!--dependencies是引入实际依赖的，properties只负责定义版本的-->
+       <!--
+       <properties> = 变量定义区
+       工作流类似
+       spring.version=3.1.0
+       mysql.version=8.0.33
+       -->
         <java.version>17</java.version>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <spring-cloud.version>2023.0.3</spring-cloud.version>
+        <spring-cloud-alibaba.version>2023.0.3.2</spring-cloud-alibaba.version>
     </properties>
+    <!--
+    然后下方引入的
+    dependencyManagement
+    就是专门使用上方版本号的，上面定义好以后下面用
+    <version>${spring-cloud.version}</version>
+    的方式接收
+    -->
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-parent</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+
+
+
+
     <dependencies>
-        <dependency>
+        <!--这俩依赖是SpringBoot的，但是父项目只是来定义框架版本的
+        ，不用SPB写代码，如果不删掉这俩依赖，子模块会强制继承，
+        到时候他们自己用自己添加去-->
+        <!--<dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter</artifactId>
         </dependency>
-
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
-        </dependency>
+        </dependency>-->
     </dependencies>
 
     <build>
