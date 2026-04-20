@@ -1,5 +1,7 @@
 package com.sias.Product.Service;
 
+import com.sias.Product.Bean.Product;
+
 public interface ProductService {
-    void getProduct(Long productId);
+    Product getProductByid(Long productId);
 }

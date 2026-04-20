@@ -22,6 +22,15 @@
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
+    <!--添加测试依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <!--只让其在测试范围内生效-->
+            <scope>test</scope>
+        </dependency>
+
+
     </dependencies>
 
 </project>

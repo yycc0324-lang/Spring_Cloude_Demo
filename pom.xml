@@ -8,7 +8,7 @@
         <version>3.3.4</version>
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
-    <packaging>pom</packaging>
+    <packaging>pom</packaging><!--此处的pom指的是父，代表以后所有的依赖他是爹,父项目也无需写代码，进行Spring、微服务的依赖管理即可-->
     <modules>
         <module>services</module>
     </modules><!--此处的pom指的是父，代表以后所有的依赖他是爹,父项目也无需写代码，进行Spring、微服务的依赖管理即可-->
