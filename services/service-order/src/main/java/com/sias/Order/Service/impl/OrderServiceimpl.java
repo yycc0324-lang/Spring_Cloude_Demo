@@ -49,13 +49,13 @@ public class OrderServiceimpl implements OrderService {
     private Product getProductFromRemote(Long productId) {
         //1、获取到商品服务所在的所有机器IP+Port
         List<ServiceInstance> instances = discoveryClient.getInstances("service-product");
-
+        //TODO 这里需要优化，索引0意味着如果有多台服务器，第一台挂了第二台会顶上，但是其他服务器在第二台挂之前不会再服务，需要负载均衡
         ServiceInstance instance = instances.get(0);
         //远程URL
         String url = "http://" + instance.getHost() + ":" + instance.getPort() + "/product/" + productId;
 
         //2、给远程发送请求
-        log.info("开始发送请求",url);
+        log.info("开始发送请求: {}", url.toString());
         Product product = restTemplate.getForObject(url, Product.class);//getForObject是发送get请求，url请求路径，返回的JSON自动转换为Product
 
         return product;
