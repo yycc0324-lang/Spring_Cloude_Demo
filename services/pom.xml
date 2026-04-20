@@ -39,6 +39,11 @@
             <artifactId>lombok</artifactId><!--该依赖是DTO和Bean类上面注解需要@Data用的-->
             <scope>annotationProcessor</scope>
         </dependency>
+        <dependency>
+            <groupId>com.example</groupId>
+            <artifactId>model</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
     </dependencies>
 
 </project>

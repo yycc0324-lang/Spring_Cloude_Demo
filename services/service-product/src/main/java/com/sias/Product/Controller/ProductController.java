@@ -1,8 +1,6 @@
 package com.sias.Product.Controller;
-
-
-import com.sias.Product.Bean.Product;
 import com.sias.Product.Service.ProductService;
+import com.sias.product.Bean.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;

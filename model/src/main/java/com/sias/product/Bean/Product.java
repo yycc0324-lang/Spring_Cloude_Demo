@@ -1,8 +1,10 @@
-package com.sias.Product.Bean;
+package com.sias.product.Bean;
 //DTO中的class一般不会进行数据处理，需要处理的就写在Bean
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 
 

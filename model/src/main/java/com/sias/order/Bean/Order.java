@@ -1,8 +1,9 @@
-package com.sias.Order.Bean;
+package com.sias.order.Bean;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import java.math.BigDecimal;
 import java.util.List;
 

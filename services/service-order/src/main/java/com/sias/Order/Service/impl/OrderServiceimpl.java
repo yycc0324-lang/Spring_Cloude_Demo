@@ -1,14 +1,15 @@
 package com.sias.Order.Service.impl;
 import java.math.BigDecimal;
 import com.alibaba.nacos.shaded.com.google.common.collect.Lists;
-import com.sias.Order.Bean.Order;
+
 import com.sias.Order.Service.OrderService;
+import com.sias.order.Bean.Order;
 import org.springframework.stereotype.Service;
 
 @Service
 public class OrderServiceimpl implements OrderService {
     @Override
-    public Order creatOrder(Long productId , Long userId) {
+    public com.sias.order.Bean.Order creatOrder(Long productId , Long userId) {
         Order order = new Order();
         order.setId(0L);
         //TODO 总金额逻辑待完善

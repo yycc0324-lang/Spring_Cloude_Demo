@@ -11,6 +11,7 @@
     <packaging>pom</packaging><!--此处的pom指的是父，代表以后所有的依赖他是爹,父项目也无需写代码，进行Spring、微服务的依赖管理即可-->
     <modules>
         <module>services</module>
+        <module>model</module>
     </modules><!--此处的pom指的是父，代表以后所有的依赖他是爹,父项目也无需写代码，进行Spring、微服务的依赖管理即可-->
     <groupId>com.example</groupId>
     <artifactId>cloud_demo</artifactId>
