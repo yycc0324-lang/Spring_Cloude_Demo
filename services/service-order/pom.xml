@@ -18,6 +18,11 @@
     </properties>
     <!-- 添加SpringWeb依赖 -->
     <dependencies>
+        <!--引入测试需要的依赖-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
@@ -31,6 +36,11 @@
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+        </dependency>
+        <!--订单功能要负载均衡调用多次别人所以给订单加负载均衡-->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-loadbalancer</artifactId>
         </dependency>
 
     </dependencies>
