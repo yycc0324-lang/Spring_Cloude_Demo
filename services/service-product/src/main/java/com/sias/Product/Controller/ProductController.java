@@ -14,6 +14,7 @@ public class ProductController {
 
     @GetMapping("/product/{id}")
     public Product getProduct(@PathVariable("id") Long productId) {
+        System.out.println("hello,查看端口使用情况");
           Product product = productService.getProductByid(productId);
         //TODO 写完Service后需要修改返回数据为商品数据
         return product;

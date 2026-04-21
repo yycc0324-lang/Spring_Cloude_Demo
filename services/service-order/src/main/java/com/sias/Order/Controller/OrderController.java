@@ -14,7 +14,6 @@ public class OrderController {
 
     @GetMapping("/order/create")
     public String Createorder(@RequestParam Long productId, Long userId) {
-         orderService.creatOrder(productId, userId);
          Order order = orderService.creatOrder(productId,userId);
         return "order created" + order.toString();
     }

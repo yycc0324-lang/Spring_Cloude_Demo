@@ -2,7 +2,7 @@ package com.sias.Order.Service.impl;
 import java.math.BigDecimal;
 import java.util.Arrays;
 import java.util.List;
-import com.alibaba.nacos.shaded.com.google.common.collect.Lists;
+
 import com.sias.Order.Service.OrderService;
 import com.sias.order.Bean.Order;
 import com.sias.product.Bean.Product;
@@ -12,6 +12,7 @@ import org.springframework.cloud.client.ServiceInstance;
 import org.springframework.cloud.client.discovery.DiscoveryClient;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.cloud.client.loadbalancer.LoadBalancerClient;
 
 @Service
 @Slf4j
@@ -21,11 +22,13 @@ public class OrderServiceimpl implements OrderService {
     private DiscoveryClient discoveryClient;
     @Autowired
     private RestTemplate restTemplate;
+    @Autowired
+    LoadBalancerClient loadBalancerClient;
 
 
     @Override
     public Order creatOrder(Long productId , Long userId) {
-        Product product =  getProductFromRemote(productId);//Order-->请求发送给Product--->拿到Product返回的price
+        Product product =  getProductFromRemoteWithLoadBalancerAnnotation(productId);//Order-->请求发送给Product--->拿到Product返回的price
         // 拿到的product对象大概是这样：
         // Product {
         //     id: 1001,
@@ -56,6 +59,33 @@ public class OrderServiceimpl implements OrderService {
 
         //2、给远程发送请求
         log.info("开始发送请求: {}", url.toString());
+        Product product = restTemplate.getForObject(url, Product.class);//getForObject是发送get请求，url请求路径，返回的JSON自动转换为Product
+
+        return product;
+    }
+
+    //TODO LoadBalance的负载均衡写法
+    private Product getProductFromRemoteWithLoadBalancer(Long productId) {
+        //负载均衡
+        ServiceInstance choose = loadBalancerClient.choose("service-product");
+
+        //远程URL
+        String url = "http://" + choose.getHost() + ":" + choose.getPort() + "/product/" + productId;
+
+        //2、给远程发送请求
+        log.info("开始发送请求: {}", url.toString());
+        Product product = restTemplate.getForObject(url, Product.class);//getForObject是发送get请求，url请求路径，返回的JSON自动转换为Product
+
+        return product;
+    }
+
+    private Product getProductFromRemoteWithLoadBalancerAnnotation(Long productId) {
+
+        String url = "http://service-product/product/" + productId;
+        //2、给远程发送请求
+        log.info("开始发送请求，自动负载均衡: {}", url.toString());
+
+
         Product product = restTemplate.getForObject(url, Product.class);//getForObject是发送get请求，url请求路径，返回的JSON自动转换为Product
 
         return product;
