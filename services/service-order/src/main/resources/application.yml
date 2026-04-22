@@ -1,0 +1,21 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: service-order
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 127.0.0.1:18848
+        username: nacos
+        password: stVIc1DecAR9
+      config:
+        server-addr: 127.0.0.1:18848  #  添加这一行，指定 config 的服务器地址
+        namespace: dev
+        username: nacos              #  如果 config 也需要认证，加上
+        password: stVIc1DecAR9       #  如果 config 也需要认证，加上
+  config:
+    import:
+      - nacos:common.properties?group=order
+      - nacos:database.properties?group=order
+

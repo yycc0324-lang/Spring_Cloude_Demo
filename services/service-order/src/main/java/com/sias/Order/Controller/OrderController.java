@@ -1,5 +1,6 @@
 package com.sias.Order.Controller;
 import com.sias.Order.Service.OrderService;
+import com.sias.Order.properties.OrderProperties;
 import com.sias.order.Bean.Order;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,10 +12,15 @@ public class OrderController {
 
     @Autowired
     private OrderService orderService;
+    @Autowired
+    private OrderProperties orderProperties;
 
     @GetMapping("/order/create")
     public String Createorder(@RequestParam Long productId, Long userId) {
          Order order = orderService.creatOrder(productId,userId);
-        return "order created" + order.toString();
+        return "order created" + order.toString()
+                + "自作主自傲到底还是timeout:" + orderProperties.getTimeout()
+                + "autoConform:" + orderProperties.getAutoConfirm()
+                + "dbUrl:" + orderProperties.getDbUrl();
     }
 }
