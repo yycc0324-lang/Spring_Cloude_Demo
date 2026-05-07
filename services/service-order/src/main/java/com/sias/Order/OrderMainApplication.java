@@ -2,8 +2,9 @@ package com.sias.Order;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.openfeign.EnableFeignClients;
 
-
+@EnableFeignClients //开启Feign的远程调用功能
 @EnableDiscoveryClient//开启服务发现功能
 @SpringBootApplication//启动类，是SpringBoot应用
 public class OrderMainApplication {

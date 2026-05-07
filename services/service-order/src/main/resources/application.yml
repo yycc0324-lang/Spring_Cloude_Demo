@@ -3,6 +3,8 @@ server:
 spring:
   application:
     name: service-order
+  config:
+    import: optional:nacos:common.properties?group=order
   cloud:
     nacos:
       discovery:
@@ -10,12 +12,26 @@ spring:
         username: nacos
         password: stVIc1DecAR9
       config:
-        server-addr: 127.0.0.1:18848  #  添加这一行，指定 config 的服务器地址
-        namespace: dev
-        username: nacos              #  如果 config 也需要认证，加上
-        password: stVIc1DecAR9       #  如果 config 也需要认证，加上
+        server-addr: 127.0.0.1:18848
+        namespace: test
+        username: nacos
+        password: stVIc1DecAR9
+
+---
+spring:
   config:
     import:
-      - nacos:common.properties?group=order
-      - nacos:database.properties?group=order
+      - optional:nacos:common.properties?group=order
+      - optional:nacos:database.properties?group=order
+    activate:
+      on-profile: dev
+---
+spring:
+  config:
+    import:
+      - optional:nacos:common.properties?group=order
+    activate:
+      on-profile: test
+---
+
 

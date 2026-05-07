@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import com.sias.Order.Service.OrderService;
+import com.sias.Order.feign.ProductFeignClient;
 import com.sias.order.Bean.Order;
 import com.sias.product.Bean.Product;
 import lombok.extern.slf4j.Slf4j;
@@ -24,11 +25,17 @@ public class OrderServiceimpl implements OrderService {
     private RestTemplate restTemplate;
     @Autowired
     LoadBalancerClient loadBalancerClient;
+    //注入更方便的请求FeignClient
+    @Autowired
+    private ProductFeignClient productFeignClient;
+
+
 
 
     @Override
     public Order creatOrder(Long productId , Long userId) {
-        Product product =  getProductFromRemoteWithLoadBalancerAnnotation(productId);//Order-->请求发送给Product--->拿到Product返回的price
+        //Product product =  getProductFromRemoteWithLoadBalancerAnnotation(productId);//Order-->请求发送给Product--->拿到Product返回的price
+        Product product = productFeignClient.getProductbyId(productId);
         // 拿到的product对象大概是这样：
         // Product {
         //     id: 1001,
